@@ -1,0 +1,93 @@
+一.AJAX
+   1.名词解释
+	   1.同步（Synchronous）
+		   在一个任务进行中时，不能开启其它的任务。
+			 同步访问：浏览器在向服务器发送请求时，浏览器只能等待服务器的响应，不能做其它的事情。
+			 出现场合：
+			   (1)地址栏输入网址访问网页
+				 (2)a标记的默认跳转
+				 (3)submit按钮的表单提交   
+		 2.异步（Asynchronous）
+		   在一个任务进行中时，可以开启其它的任务。
+			 异步访问：浏览器在向服务器发送请求时，不耽误用户在网页上做其它的操作。
+			 出现场合：
+			   (1)用户名重复验证
+			   (2)搜索建议
+			   (3)聊天室
+			   (4)股票走势图
+   2.什么是AJAX
+	   AJAX:Asynchronous Javascript And Xml.
+		      异步的          js       和 xml
+     本质：使用js提供的异步对象(XMLHttpRequest),异步的向服务器发送请求，并接收响应的数据。
+		 AJAX中，可以无刷新的来更改页面中布局内容。
+   3.异步请求的步骤
+	   (1)创建AJAX对象（xhr）
+		    标准创建：var xhr=new XMLHttpRequest();
+				IE8以下：var xhr=new ActiveXObject("Microsoft.XMLHttp");
+        通过window.XMLHttpRequest来判断浏览器是否支持标准创建。如果不支持标准创建，那么window.XMLHttpRequest的值为null。
+				ex:
+				if(window.XMLHttpRequest){
+				   var xhr=new XMLHttpRequest();
+				}else{
+				  var xhr=new ActiveXObject("Microsoft.XMLHttp");
+				}
+		    
+				练习：将创建异步对象的步骤封装到一个函数中，函数名createXhr(),在函数体内将创建好的异步对象返回到函数外;
+
+		 (2)绑定监听事件
+		    1.readyState属性
+				  作用：用于表示xhr对象的请求状态
+					值：0-4表示5个不同状态
+					 0：请求尚未初始化
+					 1：已经打开到服务器的连接，正在发送请求
+					 2：接收响应头
+					 3：接收响应主体
+					 4：接收响应数据成功
+           注意：当readyState的值为4的时候，才表示所有的响应都已经接收完成。
+        2.status属性
+				  作用：表示服务器的响应状态
+					值：200
+					当status的值为200时，表示服务器已经正确的处理请求并给出响应。
+        3.onreadystatechange-事件
+				  作用：当xhr对象的readyState属性值发生改变时，要自动激发的操作（事件）。
+					语法：
+					  xhr.onreadystatechange=function(){
+						 if(xhr.readyState==4&&xhr.status==200){
+							  var result=xhr.responseText;
+								console.log(result);
+							} 
+						}
+
+		 (3)打开连接（创建请求）
+		    open() 作用：打开连接
+				语法：xhr.open(method,url,isAsyn);
+				1.method 请求方法 
+				  string类型 ：get/post
+        2.url 请求地址
+				  string类型
+        3.isAsyn 
+				  boolean 类型:true(异步)/false(同步)
+
+		 (4)发送请求 
+		    send() 发送请求
+				语法：xhr.send(body)
+				body:请求主体
+				如果没有请求主体的话，body位置放null。
+				如果有请求主体，则将数据放于body位置处。
+		    
+     练习：
+		   1.在demo.js文件中创建接口（ajaxExer）,在接口中响应“这是我的第一个ajax练习！”
+			 2.新建一个网页，网页中创建一个按钮和一个div，点击按钮时异步的向ajaxExer接口发送请求，并将响应回来的结果显示在div元素中。
+   4.使用get提交方式，发送请求数据（带参数）
+	   ex:
+		   /demo/login?uname=dangdang&upwd=123456
+     练习：
+		   1.在demo.js中创建login接口，在接口中获取用户名称，并响应输出获取到的用户名。
+
+			 2.创建一个login.html，在网页中创建一个用户名输入框和一个按钮，点击按钮时，异步的将用户名称（将用户名以参数的方式拼接在url后）提交给服务器端（login接口）。
+		  
+ 课后作业：
+    1.完成异步登录，并将获取的用户名和密码响应回前端
+		2.复习整理思维导图
+		3.预习后面新课内容并尝试将用户名和密码用post方式提交给服务器。
+		      

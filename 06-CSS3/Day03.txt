@@ -1,0 +1,239 @@
+一.框模型
+  1.内边距
+	  1.什么是内边距
+		  元素边框与内容之间的间距。
+			内边距会扩大元素边框占地区域。
+    2.语法
+		  属性：
+			  padding:value 四个方向的内边距
+				padding-top/bottom/left/right:value 单边定义
+      取值：
+			  1.以px为单位的数字
+				2.以%为单位的数字
+    3.简写方式
+		  padding:value 四个方向
+			padding:v1 v2 上下 左右
+			padding:v1 v2 v3 上 左右 下
+			padding:v1 v2 v3 v4 上 右 下 左（顺时针）
+  2.属性：box-sizing
+	  作用：指定框模型的计算方式
+		取值：
+		    1.content-box
+				  默认值，采用默认的方式计算元素的占地尺寸
+					实际宽度=左右外边距+左右内边距+左右边框+width
+					实际高度=上下外边距+上下内边距+上下边框+height
+        2.border-box
+				  元素的尺寸，会包含border以及padding的值
+					实际宽度=width+margin
+				  实际高度=height+margin
+二.背景
+  以单一颜色或图片来填充元素作为背景。
+  1.背景颜色
+	  属性：background-color
+		取值：合法的颜色值
+		注意：背景颜色和背景图片都从边框位置处开始填充。
+  2.背景图像
+	  属性：background-image
+		取值：url(图像路径);
+		ex:
+		background-image:url(a.jpg);
+  3.背景图像平铺
+	  属性：background-repeat
+		取值：
+		   1.repeat 平铺，默认值
+			 2.no-repeat 不平铺，只显示一次图片
+			 3.repeat-x 只在水平方向平铺
+			 4.repeat-y 只在垂直方向平铺
+  4.背景图像尺寸
+	  属性：background-size
+	  取值：
+		   1.width height
+			 2.width% hegiht%
+			 3.cover 覆盖，将背景图等比放大，直到背景图完全覆盖元素所有区域为止。
+			 4.contain 将背景图等比放大，直到背景图碰到元素的某一个边缘为止。
+  5.背景图像固定
+	  将背景图固定在网页的某个位置，一直在可视化区域中，不会随着滚动条而发生位置的变化。
+		属性：background-attachment
+		取值：
+		  1.scroll 默认值，滚动
+			2.fixed 固定
+  6.背景图像定位
+	  作用：改变背景图在元素中的位置
+		属性：background-position
+		取值：
+		   1.x y
+			   x:背景图在水平方向的偏移距离
+				  取值为正，向右移动
+				  取值为负，向左移动
+         y:背景图在垂直方向的偏移距离
+				  取值为正，向下移动
+				  取值为负，向上移动
+       2.x% y%
+			   0% 0% 左上角
+				 50% 50% 正中间位置
+				 100% 100% 右下角
+       3.关键词
+			   x:left/center/right
+				 y:top/center/bottom
+  7.背景属性简写方式
+	  属性：background
+		取值：color url() repeat attachment position;
+三.渐变
+  1.什么是渐变
+	  渐变指的是多种颜色平缓变化的一种显示效果。
+  2.渐变的主要因素
+	  色标：一种颜色及其出现的位置
+		一个渐变是由多个色变组成（至少两个）
+  3.渐变的分类
+	  1.线性渐变
+		  以直线的方向来填充渐变色。
+			属性：background-image
+			取值：linear-gradient(angle,color-point1,color-point2,...)
+			 (1)angle
+			    表示渐变填充的方向或角度
+          取值：
+					   1.关键词
+						   to top:从下向上填充渐变
+               to bottom:从上向下填充渐变
+							 to left:从右向左填充渐变
+							 to right:从左向右填充渐变
+             2.角度值
+						   0deg 等同于to top
+							 90deg 等同于to right
+							 180deg 等同于bo bottom
+							 270deg 等同于to left
+       (2)color-point
+			    色标：颜色 及其 位置
+					取值：颜色 与 位置 的组合，中间用空格隔开。
+					ex:
+					red 0%:在填充方向开始的位置处颜色为红色
+					green 50%:到填充方向一半位置处，颜色为绿色
+					blue 200px:
+
+		2.径向渐变
+		  以圆形的方式来填充渐变色。
+			属性：background-image
+		  取值：radial-gradient([size at position],color-point1,color-point2,..);
+
+			size at position:
+			   size:半径，以px为单位的数字
+				 position:圆心的位置
+				          取值：x y 具体数字
+									      x% y% 元素宽和高的占比
+												关键词：left/center/right
+												        top/center/bottom
+
+		3.重复渐变
+		  将线性渐变 或 径向渐变重复几次出现。
+      1.重复线性渐变
+			  background-image:repeating-linear-gradient(angle,color-point1,color-point2,...);
+      2.重复径向渐变
+			  background-image:repeating-radial-gradient([size at position],color-point1,color-point2,...);
+
+        注意：在重复渐变中色标位置用绝对值，不要用%。
+	  
+  4.浏览器兼容性
+	  各浏览器的新版本都支持渐变属性，但低版本不支持。对于不支持的浏览器，可以通过设置浏览器前缀的方式，让浏览器支持渐变。
+		firefox:-moz-
+		IE:-ms-
+		Oprea:-o-
+		chrome&safari:-webkit-
+		ex:
+		  background:-ms-linear-gradient(0deg,red,blue);
+			background:-moz-linear-gradient(0deg,red,blue);
+
+    https://www.caniuse.com 查看css属性支持的浏览器版本号
+四.文本格式化属性 
+  1.字体属性
+	  1.指定字体类型
+		  属性：font-family
+			取值：用逗号隔开字体名称列表
+			ex:
+			 font-family:"微软雅黑","黑体",Arial;
+    2.指定字体大小
+		  属性：font-size
+			取值：以px或pt为单位的数字
+    3.字体加粗
+		  属性：font-weight
+			取值：
+			   1.bold:加粗（b,h1-h6）
+				 2.normal:正常
+				 3.value 无单位的整百倍数字 
+				         400等同于normal
+								 900等同于bold
+    4.字体样式
+		  属性：font-style
+			取值：
+			    1.normal:正常字体
+					2.italic:斜体(i)
+    5.小型大写字母
+		  将小写字母变为大写，但大小与小写字母一致。
+			属性：font-variant
+			取值：
+			  1.normal:正常
+				2.small-caps:小型大写字母
+    6.字体属性的简写方式
+		  属性：font
+			取值：style variant weight size family;
+			注意：使用简写形式时，必须要设置family的值，否则无效。
+			ex:
+			 font:italic 12px; //无效
+			 font:12px "微软雅黑";//正确
+     练习：
+		   页面中新建一个p元素，内容随意，最好中英文结合，然后按以下要求设置样式：
+			    1.字体为"Arial"类型。
+					2.字体大小为24px。
+					3.文本加粗并倾斜显示。
+					4.将所有的字母显示为小型大写字母。
+	2.文本格式
+	  1.文本颜色
+		  属性：color
+			取值：合法的颜色值
+    2.文本排列
+		  作用：指定文本，行内，行内块元素的水平对齐方式。
+			属性：text-align
+			取值：left/center/right/justify(两端对齐)
+    3.文字修饰（线条）
+		  属性：text-decoration
+			取值：
+			   1.none：无任何线条修饰
+				 2.underline:下划线
+				 3.overline:上划线
+				 4.line-through:删除线(s标记)
+    4.行高
+		  作用：设置一行数据所占的高度
+			属性：line-height
+			取值：以px单位的数字；
+			      无单位的数字（行高是当前字体大小的倍数）。
+      注意：如果行高设置的比文字的高度大的话，那么该行文本将在指定行高内呈现垂直居中的效果。
+    5.首行文本缩进
+		  属性：text-indent
+			取值：以px为单位的数字
+    6.文本阴影
+		  属性：text-shadow
+			取值：h-shadow v-shadow blur color;
+五.表格
+  1.表格常用属性
+	  1.边距：padding
+		2.边框：border
+		3.尺寸：width/height
+		4.文本格式化：font-*,text-*,line-height
+		5.背景属性：颜色，图像，渐变
+		6.vertical-align:指定单元格数据的垂直对齐方式
+		  取值：top/middle/bottom 上/中/下
+  
+
+课后作业：
+		1.创建一个400*400px的表格，4行4列：
+			  1.设置每个单元格的尺寸为100*100;
+				2.设置表格和单元格的边框为1px solid #000;
+        3.尝试着为每个td增加上外边距10px。
+
+		2.完成"课后作业.png"效果图中的布局（注意细节修饰）
+		
+		3.可以开始做个人项目（参考http://www.cssmoban.com）
+		  
+    
+			
+
+		  

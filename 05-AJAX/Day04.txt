@@ -1,0 +1,112 @@
+一.AJAX
+  1.使用post方法提交数据给服务器
+	  1.post的请求数据要放在请求主体中
+		  xhr.send("uname="+value1+"&upwd="+value2);
+    2.在发送请求之前，需要手动的修改请求的消息头
+		  xhr.setRequestHeader("Content-Type","application/x-www-form-urlencode");
+    练习：
+		  1.在demo.js中创建一个list接口,在接口中去完成xz用户表的查询，并将结果响应回前端网页。 
+
+			2.新建一个05-list.html网页，在网页中添加一个按钮，点击按钮时异步的向服务器端的list接口发起请求，并取回结果数据打印在控制台。
+  2.js对象的数据格式
+	  对象的数据格式：
+		  var 对象名={
+			  属性：值，
+				属性：值，
+				属性：值
+			}
+			取对象的值的时候：对象名.属性名
+		ex:
+		  var tom={
+			  name:"汤姆",
+				age:20,
+				gender:"男"
+			}
+			tom.age
+  3.JSON
+	  1.什么是JSON
+		 JSON:JavaScript Object Notation
+		        js        对象  表现方式
+     js对象表示法，即以js对象的数据格式表现出来的字符串。
+    2.JSON语法
+		 (1)JSON数据
+		   JSON中用一对{}来表示一个对象。
+			 对象中的属性名称，必须用""引起来，值如果是字符串的话，也必须用""引起来。
+			 表现出来的是字符串，所以在最外层加引号(单引号)。
+			 ex:
+			   普通字符串：var tom="汤姆";
+				 JSON字符串：var tom='{"name":"汤姆"}';
+				
+         普通数组：var arr=["tom","lilei","lucy"]
+         JSON数组：
+				 '[
+				   {
+					   "name":"tom",
+						 "age":20
+					 },
+					 {
+					   "name":"lilei",
+						 "age":21
+					 },
+					 {
+					   "name":"lucy",
+						 "age":18
+					 }
+				 ]'
+     (2)将JSON字符串转换成js对象/js数组
+		    使用JSON.parse()来将JSON字符串转换为js对象
+				var obj=JSON.parse("从后端响应回来的json字符串");
+  4.XML
+    AJAX:Asynchronous Javascript And Xml
+		1.什么是XML
+		  eXtensible Markup Language
+			 可扩展的   标记   语言
+      xml的标记没有被预定过，需要自行定义。
+      xml的宗旨是做数据传递，而非数组显示。
+    2.语法规范
+		  xml可以保存独立的 *.xml的文件，也可以以字符串串的方式出现。
+      1.xml的声明需要放在文件的最顶端
+			  <?xml version="1.0" encoding="utf-8"?>
+      2.xml标记语法
+			  (1)xml标记必须成对出现
+				   <name></name> 正确
+					 <name> 错误
+        (2)xml标记严格区分大小写，开始和结束标记必须一致
+				   <Name></Name> 正确
+					 <Name></name> 错误
+        (3)xml标记允许被嵌套，注意嵌套顺序
+				   <student>
+						 <name>tom</name>
+					 </student>
+        (4)xml标记都允许自定义属性，格式与html一致，但属性值，必须用""引起来
+				   <student num="10" name="main"></student>
+        (5)每个xml文件，必须有一个根元素
+				   
+			  练习：完善student.xml文件的数据，并新建一个网页点击按钮时异步的向studetn.xml文件发起请求，将xml数据取回前端网页进行展示。	 
+		3.使用AJAX请求xml数据
+		  1.创建异步对象
+			2.绑定监听事件
+			3.打开连接
+			4.发送请求
+			  
+    4.解析XML文档对象的内容
+		  核心方法：getElementsByTagName("标签名称");
+			返回值：返回一个包含指定元素们的"类数组"。
+project====================================
+1.准备工作
+  在xz文件夹中创建了myPro文件夹,然后在routes文件夹创建了myPro.js路由，并将路由挂载到app.js中，同时也将myPro文件夹托管到app.js中。
+2.完成登录功能（异步发起请求）
+  1.在myPro.js中创建login接口，获取前端传递过来的用户名和密码，将用户名和密码拿到数据库中完成查询，并给出提示（登录成功/用户名或密码错误）
+	2.在myPro文件夹中新建一个网页01-login.html,在网页中添加用户名和密码框，点击按钮时将用户名和密码异步的提交给服务器，完成登录功能。
+3.将取回的用户列表数据以表格的方式展示在网页中（参考05-list.html）。
+  <table>
+	  <thead></thead>
+		<tbody id="showBody"></tbody>
+	</table>
+			
+
+			     
+
+       
+
+		 

@@ -1,0 +1,113 @@
+一.组件
+   1.导航
+	   Bootstrap提供了三种形式的导航：水平导航，选项卡导航，胶囊导航
+		 (1)水平导航
+		  创建一个简单的水平导航，可以在ul元素上添加.nav类，在每个li选项上添加一个.nav-item类，在每个链接上添加.nav-link类。
+			<ul class="nav">
+			  <li class="nav-item">
+				  <a href="" class="nav-link">内容</a>
+				</li>
+			</ul>
+			通过设置ul的justify-content-*来控制导航的对齐方式。
+			设置ul的flex-column类用于创建垂直导航。
+			.nav-justified类可以设置导航项等宽显示。
+     (2)选项卡导航
+		  使用.nav-tabs类可以将导航转换为选项卡
+			如果要设置选项卡是动态可切换的，可以在每个链接上添加data-toggle="tab"属性，然后在每个选项对应的内容上添加.tab-pane类。
+			ex:
+			<ul class="nav nav-tabs">
+			  <li class="nav-item">
+				  <a class="nav-link" data-toggle="tab" href="#one"></a>
+				</li>
+			</ul>
+			<!--以下内容是点击选项卡时要切换的内容-->
+			<div class="tab-content">
+				 <div class="tab-pane" id="one">具体内容1</div>
+			</div>
+     (3)胶囊导航
+		  .nav-pills类可以将导航设置成胶囊效果。
+			要实现胶囊导航的动态切换需要设置data-toggle属性值为pill
+   2.导航栏
+	   使用.navbar类创建导航栏，后面紧跟.navbar-expand-xl/lg/md/sm类来创建响应式导航栏（大屏幕下水平铺开，小屏幕下垂直堆叠）。
+		 导航栏上的选项可以使用ul元素并添加navbar-nav类。然后在li元素上添加.nav-item类，a元素上使用.nav-link类。
+		 ex:
+		  <nav class="navbar navbar-expand-sm bg-dark">
+          <ul class="navbar-nav">
+              <li class="nav-item">
+							  <a href="#" class="nav-link">导航内容</a>
+							</li>
+          </ul>
+      </nav>
+   3.折叠
+	   控制内容的隐藏和显示，在a标记或button元素上添加data-toggle="collapse"属性，data-target="#id"属性是对应着是折叠的内容。
+		 ex:
+		  <button class="btn" data-toggle="collapse" data-target="#demo">折叠</button>
+
+			<div id="demo" class="collapse">具体内容</div>
+   4.折叠导航栏
+	   要创建折叠导航栏，需要在按钮上添加.navbar-toggler类，并设置data-toggle="collapse"与data-target="#id"。然后在设置了class="collapse navbar-collapse"类的div上包裹导航内容（链接），内容所在的div元素的id应匹配在按钮的data-target属性上。
+   5.卡片
+	   通过.card与.card-body类创建一个卡片
+		 .card-header类用于创建卡片的头部
+		 .card-footer类用于创建卡片的底部
+		 ex:
+		 <div class="card">
+		    <div class="card-header">头部</div>
+				<div class="card-body">内容</div>
+				<div class="card-footer">底部</div>
+		 </div>
+		 注意：使用data-parent属性来确保所有的折叠元素在指定的父元素下，这样才能实现在一个折叠选项显示时其它选项隐藏。
+     练习：卡片+折叠=手风琴效果
+   6.媒体对象
+	   处理图片或视频等内容的布局，应用场景有博客，评论，商品列表等。
+
+	   创建媒体对象在容器上添加.media类，然后将多媒体内容放在子容器上，子容器上需要添加.media-body类，可以使用align-self-*相关类设置多媒体对象的图片显示位置（上中下）
+		 <div class="media">
+			  <img src="a.jpg">
+				<div class="media-body">内容</div>
+		 </div>
+   7.轮播
+	   创建轮播：.carousel
+		 为轮播添加指示符：.carousel-indicators
+		 添加要切换的内容：.carousel-inner
+		 指定每个图片的样式：.carousel-item
+		 <div class="carousel" data-ride="carousel">
+		   <!--指示符-->
+		   <ul class="carousel-indicators">
+			    <li data-target="#id" data-slide-to="0"></li>
+					...
+			 </ul>
+			 <!--轮播图片-->
+			 <div class="carousel-inner">
+			    <div class="item">放图片的位置</div>
+			 </div>
+       <!--左右箭头-->
+			 <a href="" class="carousel-control-prev"><a/>
+			 <a href="" class="carousel-control-next"></a>
+		 </div>
+  
+   8.模态框
+	   模态框是覆盖在父窗体上的子窗体，模态框可以在不离开父窗体的情况下有一些互动，提供信息交换等。
+		 <button data-toggle="modal" data-target="#main"></button>
+
+		 <div class="modal" id="main">
+		    <div class="modal-dialog">
+				  <div class="modal-content">
+					  <div class="modal-header">...</div>
+						<div calss="modal-body">...</div>
+						<div calss="modal-footer">...</div>
+					</div>
+				</div>
+		 </div>
+   9.其它小组件
+	   (1)徽章
+		    .badge-*
+     (2)巨幕
+		    .jumbotron
+     (3)分页
+		    可以在ul元素上添加.pagination类，然后在li上添加.page-item类，a标记上添加.page-link
+
+课后作业：
+    1.用折叠导航组件完成bootstrap官网导航栏效果，在768px-991px时将导航栏中的部分内容隐藏起来，在小于768px时将导航内容折叠起来(效果图见课后作业文件夹)。
+
+	   

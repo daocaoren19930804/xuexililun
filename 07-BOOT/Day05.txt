@@ -1,0 +1,205 @@
+一.组件
+  1.面包屑导航
+	  使用.breadcrumb类创建面包屑导航。
+	  <ul class="breadcrumb">
+		  <li class="breadcrumb-item">
+				<a href="">...</a>
+			</li>
+		</ul>
+  2.进度条
+	  使用.progress类创建进度条
+		<div class="progress">
+		   <div class="progress-bar"></div>
+		</div>
+		添加宽度(用百分比设置，表示进度条所在的位置)
+		使用.progress-bar-striped类设置条纹进度条
+		使用.progress-bar-animated类设置进度条的动画
+
+  注意：
+	  重点：媒体查询技术，栅格布局，scss定制
+二.SCSS定制
+  ex:css文件
+    $jd_red:#f10215;
+
+		.register{
+		  color:$jd_red;
+		}
+		.search{
+		  color:$jd_red;
+		}
+		h1{
+		  color:$jd_red;
+		}
+		.img{
+		  color:$jd_red;
+		}
+  1.CSS有以下的几个缺点
+	  语法不够强大，没有变量和合理的复用机制，使用逻辑上相关的属性值必须重复编写，导致难以维护。
+
+		动态样式语言为css赋予了动态语言的特性，极大的提高了样式语言的可维护性。
+
+		常用的动态样式语言：
+		  (1)scss/sass 都属于CSS的预处理器（用一种专门的编程语言，进行web页面样式的设计，再通过编译器转化为正常的css文件，以供项目使用）
+			(2)less 
+			(3)stylus
+  2.scss
+	  scss是一款强化css的辅助工具，他在css语法的基础上增加了变量，嵌套，混合，导入，函数等高级功能，这些拓展相对于css更强大与优雅。
+		scss的作用:有助于更好的管理样式文件，以及更高效的开发项目。
+  3.使用scss
+	  在服务器端使用
+		(1)安装NodeJS解释器
+		(2)安装scss编译程序
+		   在命令行界面输入：npm install -g node-sass
+			 检查scss程序能否正常使用：node-sass -v 如果能查看到版本号，说明sass程序可用
+    (3)编译scss文件
+		   1.创建一个scss文件，编写动态样式代码
+			 2.通过以下命令行来完成编译
+				 在webstrom中用Atl+F12打开命令行界面。
+         刷新编译后的css文件：ctrl+alt+y
+
+				 单文件的转换命令：
+				 node-sass scss/input.scss  css/output.css
+
+				 多文件的转换命令：
+				 node-sass scss文件夹名称 -o css文件夹名称
+
+				 单文件监听命令：
+				 node-sass -w scss/input.scss css/output.css
+
+				 多文件监听命令：
+				 node-sass -w scss文件夹名称 -o css文件夹名称
+  4.scss的基础语法
+	  1.变量
+		  使用$符号标识变量。
+			变量命名规范遵循css中选择器的命令规范，不能以数字开头，不能包含特殊字符（可以包含_,-）,尽量见名知意。
+			ex1:
+			$jd_red:#f10215; //颜色变量
+			$normal_width:100px; //数值变量
+			$before_content:"子曰："; //字符串变量
+			$border_style:solid;  //样式变量
+			$my_border:1px $border_style $jd_red; //声明变量时，变量的值也可以是其它变量。
+			注意：
+			  (1)声明变量时变量值可以引用其它变量。
+				(2)变量定义在{}规则块外，整个样式表中都可以引用，定义在{}规则内，它只能在规则块中使用。
+				(3)声明重复变量，只有最后一处有效，且他会覆盖前面的值，尽量不要重复。
+        (4)!default规则，如果变量已经声明赋值了，那就用他声明的值，否则就用当前这个默认值。
+				
+			ex2:
+			 div{
+				border:$my_border;
+				$width:200px;  //局部变量，只能在当前选择器中使用
+				width:$width;  //在此可以调用
+			 }
+			 nav{
+			  width:$width;  //不能调用$width
+			 }
+		2.嵌套规则
+		  (1)在选择器中嵌套选择器
+			ex1:
+			  #main div.top h1{color:red;}
+				#main div.top p{margin:10px;}
+				#main div.middle{background:gray;}
+      将上面的css代码改成scss格式：
+			  #main{
+				  div.top{
+					   h1{color:red;}
+						 p{margin:10px;}
+					}
+					div.middle{background:gray;}
+				}
+      ex2:
+			  div a{color:red;}
+				div a:hover{color:blue;}
+				改写scss方式：
+				在嵌套规则中，有时候需要使用嵌套外层的父选择器，可用&代表嵌套规则外层的父选择器。
+				div{
+				   a{color:red;
+					   &:hover{color:blue;}
+				    }
+				}
+      (2)群组选择器嵌套
+			  ex:css的写法
+				nav a,header a,section a{color:blue;}
+				用scss方式写：
+				nav,header,section{a{color:blue;}}
+      (3)属性嵌套
+			  在scss中除了选择器，属性也可以嵌套
+				ex:
+				div{
+				  border-style:solid;
+					border-width:1px;
+					border-color:#000;
+				}
+				用scss的方式写：
+				div{
+				  border:{style:solid;
+					        width:1px;
+									color:#000}
+				}
+				练习：创建一个200*200的div，红色背景，鼠标悬停时过渡到黄色背景，并且变为圆形，用scss编写（可用属性嵌套规则）。
+    3.导入文件
+		  在scss中，局部文件名以_开头。
+			在scss编译时就不会编译这些以_开头的文件，而只是把这些文件用作导入，引入局部文件时可以不写文件的全名，即省略下划线，并且局部文件的后缀也可以不写。同一个局部文件可以在不同的主文件中引用。
+			引入局部文件需用 @import
+			ex:
+		  定义了一个局部文件_myColors.scss
+			引入该文件： @import "myColors"
+    4.混合器
+		  1.普通混合器
+			  使用 @minix标识符定义。
+				语法: @minix 混合器名称{样式声明}
+				通过 @include 来使用混合器
+				语法：选择器{ @include 混合器名称}
+				ex:
+        @mixin my_box_shadow{
+				 box-shadow: 0 0 9px 2px gray;
+				 -moz-box-shadow: 0 0 9px 2px gray;
+				 -ms-box-shadow: 0 0 9px 2px gray;
+				 -webkit-box-shadow: 0 0 9px 2px gray;
+				}
+				.info{
+				 background:green;
+				 border:2px solid $jd_red;
+				 @include my_box_shadow;
+				}
+      2.带参混合器
+			  @mixin 混合器名称(参数1，参数2，...){
+				   属性1：参数1；
+					 属性2：参数2；
+					 ...
+				}
+				使用带参混合器
+				选择器{ @include 混合器名称(实参1，实参2，...)}
+
+				练习：
+				定义一个带参的混合器，抽离出字体大小，样色，样式，粗细，在div和p元素中使用混合器，传入不同的参数，查看页面的效果。
+    5.继承
+		  通过 @extend实现继承
+			继承是说一个选择器可以继承另一个选择器定义的所有样式。
+			ex:
+			  .round{
+				  border:1px solid red;
+					border-radius:8px;
+				}
+
+				.round-shadow{
+				  @extend .round;
+					box-shadow:0 0 5px 1px;
+				}
+  课后作业：
+	  1.练习scss中的转换命令。
+		2.在选择器.my_border中定义1px的实线边框为透明色，元素的宽度为400px，距离左边有30px的外边距，在选择器.my_bottom_border中继承.my_border样式，并且底边框为红色，鼠标悬停时底边框为蓝色。
+		3.定义一个带参混合器，将元素的宽度，高度，内边距和背景颜色作为参数传入到混合器中，然后在div和h3元素中使用混合器并传入不同实参，查看页面效果。
+
+
+
+			   
+
+
+		   
+		   
+
+
+
+	  
+    

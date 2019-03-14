@@ -1,0 +1,211 @@
+一.表单
+  1.作用
+	  1.提供可以与用户交互的可视化控件
+		2.收集用户信息并提交给服务器
+  2.表单组成部分
+	  1.前端部分
+		  表单控件，与用户交互
+    2.服务器端部分
+		  对提交数据的处理 
+  3.表单
+	  标记：<form></form>
+		属性：
+		   1.action 
+			   作用：定义表单被提交时发生的动作，通常定义服务器处理程序的地址（url路径），默认提交给本页。
+       2.method 
+			   作用：指定表单数据的提交方式
+				 取值：
+				    1.get(默认值)
+						  1.明文提交，待提交的数据会显示在地址栏上
+							2.提交数据有大小限制，限制为2KB
+              3.向服务器要数据时使用
+
+						2.post
+						  1.提交数据无大小限制
+							2.隐式提交，待提交的数据不会显示在地址栏上
+							3.要传递数据给服务器时使用
+						3.delete
+						4.put
+       3.enctype
+			   作用：指定表单数据的编码方式，允许将什么样的数据提交给服务器。
+				 1.application/x-www-form-urlencode
+				   默认值，允许将任意字符提交给服务器（文件除外）
+         2.multipart/form-data
+				   允许将文件提交给服务器
+         3.text/plain
+				   只能提交普通字符
+  4.表单控件  
+	  能与用户进行交互的可视化控件
+		1.控件分类
+		  1.input元素
+			2.textarea元素
+			3.select元素
+			4.其它元素
+		2.input元素
+		  1.作用：在页面中提供各种输入的控件，如：文本框，密码框，单选按钮，复选框等
+			2.语法
+			  标记：<input>或<input/>
+				属性：
+				  1.type 指定输入控件的类型
+					2.name 为控件定义名称，提交给服务器端使用
+					3.value 控件的值，提交给服务器端使用
+					4.disabled 禁用控件，不能操作并且不能提交，该属性无值。
+      3.详解
+			  1.文本框和密码框
+				  文本框：<input type="text">
+					密码框：<input type="password">
+          属性
+				     1.maxlength 指定限制输入的字符数
+					   2.readonly 只读，只能看，不能改，但允许提交，无值属性
+					   3.placeholder 占位符，即默认显示在控件上的文本
+        2.按钮
+				  1.提交按钮
+					  type="submit"
+						作用：将表单中的数据，提交给服务器
+          2.重置按钮
+					  type="reset"
+						作用：将表单的内容恢复到初始化状态
+          3.普通按钮
+					  type="button"
+						没有任何功能
+          属性：
+					  value 定义按钮上的文字
+        3.单选按钮和复选框
+				  单选按钮：type="radio"
+					复选框：type="checkbox"
+          属性：
+					   1.name 除定义控件名称外，还能起到分组的作用
+						 2.checked 设置默认选中，无值属性
+        4.隐藏域和文件选择框
+				  1.隐藏域
+					  type="hidden" 
+						想要提交给服务器使用，但不需要展示给用户看的数据放在隐藏域中。
+          2.文件选择框
+					  type="file"
+						注意：
+						method的属性值必须为post
+						enctype的值必须为multipart/form-data
+    3.textarea元素
+		  作用：允许录入多行数据的文本框
+			语法：
+			  标记：<textarea></textarea>
+				属性：
+				   1.name 定义控件名称，提供给服务器用。
+					 2.readonly 只读，不能改，无值属性。
+					 3.cols 指定文本域的列数，即一行能显示多少个英文字符（中文减半）。
+					 4.rows 指定文本域的行数，即默认显示多少行数据，超出rows的话会出现滚动条。
+    4.选项框
+		  标记：<select></select>在页面中表示一个选项框
+			      <option></option>选项框中具体的选项内容
+      属性：
+			    select的属性：
+					  1.name 定义选项框的名称
+						2.size 定义显示选项的数量，默认值为1
+            3.multiple 设置多选，无值属性
+          option的属性：
+					  1.value 定义选项的值
+						2.selected 设置默认选中项的，无值属性
+    5.其它元素
+		  1.label元素
+			  作用：关联文本与表单控件
+				语法：<label>文本</label>
+				属性：for 用于绑定要与label元素关联的表单控件的id值。
+      2.为控件分组
+			  标记：<fieldset></fieldset> 为控件分组
+				      <legend></legend>     为分组指定标题
+        ex:
+				  <fieldset>
+					  <legend>标题</legend>
+						放其它控件
+					</fieldset>
+      3.浮动框架
+			  作用：允许在一个网页中，再引入另外一个网页进来。
+				标记：<iframe></iframe>
+				属性：
+				  1.src 指定要引入网页的url
+					2.width 设置框架的宽度
+					3.height 设置高度
+					4.frameborder 浮动框架的边框 默认值1
+  5.新表单元素
+	 1.什么是新表单元素
+	   在HTML5版本中新提出的控件。
+   2.详解
+	   (1)电子邮件类型：<input type="email">
+		    作用：表单提交时，会验证数据是否符合email的规范
+     (2)搜索类型：<input type="search">
+		    作用：提供了快速清除功能
+     (3)url类型：<input type="url">
+		    作用：提交时，验证数据是否符合url的规范（绝对路径）
+     (4)数字类型：<input type="number">
+		    作用：只能接受数字，并且可以灵活调整数字的值
+				属性：
+				  1.value 控件的值
+					2.min 能够接收的最小数字值
+					3.max 能够接收的最大数字值
+					4.step 每次调整数字时数字的变化范围
+		 (5)电话号码类型：<input type="tel">
+		    作用：在移动设备中，显示为“拨号键盘”效果
+     (6)范围类型：<input type="range">
+		    作用：提供滑块组件，允许用户选取指定范围的值
+				属性：
+				  min:最小值
+					max:最大值
+					value:初始值
+					step:步长
+     (7)颜色控件：<input type="color">
+		    作用：提供一个颜色拾取器
+     (8)日期类型：<input type="date">
+		    作用：提供一个日期控件
+     (9)周类型：<input type="week">
+		 (10)月类型：<input type="month">  
+二.HTTP协议
+  1.url
+	  url：用于表示任意资源的位置
+  2.url详解
+	  协议+主机名称+目录结构+文件名称
+		完整格式：<scheme>://<user>:<pwd>@<host>:<port>/<path>:<params>?<query>#<frag>
+
+		scheme:协议，方案，常见的协议：http/https
+		user:用户名
+		pwd:密码
+		host:主机，（127.0.0.1/localhost）
+		port:端口号（80）
+		path:路径，资源在服务器上的存放位置
+		params:参数
+		query:查询字符串
+		frag:锚点
+  3.HTTP协议
+	  1.什么是HTTP？
+		  Hyper Text Transfer Protocol超文本传输协议
+			规范数据是如何打包以及传输。
+    2.HTTP的历史
+		  使用HTTP1.1
+    3.HTTP协议详解
+		  1.Request消息
+			  客户端要带给服务器的数据，由三部分组成：
+				(1)请求起始行
+				   1.请求方法
+					   get:无请求主体，靠地址栏传递字符串
+						     向服务器要数据时使用
+
+						 post:有请求主题
+						     向服务器提交数据时使用
+
+						 delete:
+						 put:
+				(2)请求头
+				(3)请求主体
+
+			2.Response消息
+
+课后作业：
+   1.完成day01文件夹中"课后作业.png"布局
+	 2.整理今天所学内容的思维导图
+	 3.预习ajax内容
+
+
+					  
+		   
+		   
+
+    

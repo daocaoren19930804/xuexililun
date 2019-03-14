@@ -1,0 +1,105 @@
+一.CSS全局样式-栅格布局（重点）
+   1.基本结构
+	   容器：.container/.container-fluid
+		 行：.row
+		 列：.col
+   2.针对不同的屏幕需要使用不同的列，如
+	   大屏幕：4/12   三列 左中右
+		 中等屏幕：6/12 两列 左右
+		 小屏幕：12/12  一列
+		 .col-xl-1/2/3/4.../12
+		 .col-lg-1/2/3/4.../12
+		 .col-md-1/2/3/4.../12
+		 .col-sm-1/2/3/4.../12
+		 Bootstrap中屏幕的尺寸划分：
+		 (1)xl:Extra large 超大屏幕
+		    w>=1200px;
+     (2)lg:large 大pc屏幕
+		    1200px>w>=992px
+		 (3)md:medium 中等pc屏幕
+		    991px>w>=768px
+     (4)sm:small 小屏幕
+		    767px>w>=576px
+		 (5)xs:Extra small 超小屏幕
+		    576px>w
+		 注意：
+		   col不添加数字时，自动布局同一行的每个列的宽度占比相等，如：两个col，各占50%，三个各占33.3%，可以用col设置布局时的等宽效果。
+   3.不同屏幕下列的适应性问题
+	   col-xl-*  只能在xl屏幕下有效
+		 col-lg-*  在lg/xl屏幕下都有效
+		 col-md-*  在md/lg/xl屏幕下都有效
+		 col-sm-*  在sm/md/lg/xl屏幕下都有效
+		 总结：列可以在当前屏幕以及更大的屏幕下有效。
+   4.可以使用"列偏移"实现指定列以及其后的列向右偏移效果
+	   列偏移通过offset-*-*类来设置。
+		 第一个*号可以是sm/md/lg/xl表示不同屏幕尺寸的下的设置。
+		 第二个*号可以是1到11的数字，这些类会把一个列的左外边距增加*列
+		 ex:
+		   .offset-md-4 在中等屏幕下把当前列往右偏移了4个列
+   5.响应式：一个div可以指定在不同屏幕下的不同占比
+	   ex:
+		  <div class="col-lg-3 col-md-6 col-sm-12"></div>
+
+      以下写法，出现代码冗余，只需要写col-sm-3
+			<div class="col-lg-3 col-md-3 col-sm-3"></div>
+   6.栅格布局可以嵌套
+	   <div class="row">
+		    <div class="col">
+				  <div class="row">
+					  <div class="col">显示内容</div>
+					</div>
+				</div>
+		 </div>
+二.CSS全局样式-弹性布局（重点）
+   1.使用.d-flex/.d-inline-flex类创建一个弹性容器
+	   .flex-row 设置弹性子元素水平显示，默认效果。
+		 .flex-row-reverse 设置右对齐显示
+		 .flex-column 设置子元素垂直方向显示
+		 .flex-column-reverse 用于反转子元素
+		 .justify-content-*用于修改弹性子元素的排列方式，*号的值有：start,end,center,between,around
+    响应式flex类:
+		 d-sm/md/lg/xl-flex根据不同屏幕来设置flex类，从而实现响应式布局
+		 flex-*-row   *号表示sm/md/lg/xl
+     flex-*-column
+三.CSS全局样式类-表单
+   .form-group 堆叠表单（全屏宽度）-垂直方向
+	 .form-inline 内联表单-水平方向
+	 样式类：
+	 .form-control/form-check/form-check-inline/form-check-input/form-check-label
+四.组件
+   1.下拉菜单
+	    下拉菜单 必须 三级结构
+      <div class="dropdown">
+			  <button data-toggle="dropdown">触发元素</button>
+				<ul class="dropdown-menu">菜单项元素(隐藏)</ul>
+			</div>
+			提示：data-toggle="dropdown"会被bootstrap.js选中，添加事件监听
+			标题：.dropdown-header
+			分割线：.dropdown-divider
+			禁用：.disabled
+   2.组件-按钮组
+	   1.在元素添加.btn-group类创建按钮组
+		   <div class="btn-group">
+			    <a class="btn btn-success">按钮1</a>
+					<a class="btn btn-info">按钮2</a>
+					...
+			 </div>
+     2.使用.btn-group-lg/sm类来设置按钮的大小
+		 3.使用.btn-group-vertical类来创建垂直的按钮组
+   3.组件-信息提示框
+	   提示框可以使用.alert类，后面加.alert-success/info/danger/primary...
+		 ex:
+		 <div class="alert alert-danger w-25">
+		    <span data-dismiss="alert" class="close">x</span>
+				提示信息框
+		 </div>
+
+		 提示:data-dismiss:驳回数据，其实就是关闭信息提示框，bootstrap.js监听事件
+		   
+   课后作业：
+	    1.复习今天所有全局样式类及组件
+			2.用bootstrap框架完成"课后作业"文件夹中的布局效果
+			3.开发个人项目
+
+
+	   
